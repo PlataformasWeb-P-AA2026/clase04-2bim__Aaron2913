@@ -1,15 +1,24 @@
-<h2>Listado de Estudiantes</h3>
+<h2>Listado de Estudiantes</h2>
+
 <h3>Número de estudiantes {{ numero_estudiantes }}</h3>
 
 {% for e in estudiantes %}
     
-  {{e}}<br/>
+  {{ e }}<br/>
+
   <ul>
-  {% for numero in e.numerotelefonico_set.all%}
+    {% for numero in e.numerotelefonico_set.all %}
       <li>
-          Número telefónico {{numero}}<br/>
+        Número telefónico:
+        {{ numero.telefono }} -
+        {{ numero.tipo }} -
+        Operadora: {{ numero.obtener_operadora }}
       </li>
-  {% endfor %}
+    {% empty %}
+      <li>Este estudiante no tiene teléfonos registrados.</li>
+    {% endfor %}
   </ul>
+
   <br/>
+
 {% endfor %}
