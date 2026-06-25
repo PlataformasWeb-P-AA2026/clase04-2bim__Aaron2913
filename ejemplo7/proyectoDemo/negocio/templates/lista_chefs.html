@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Restaurantes
+{% endblock %}
+
+{% block content %}
+<h2>Listado de Chefs
+    <a href="{% url 'crear_chef' %}">+</a>
+</h2>
+<h3>Número de chefs {{ numero }}</h3>
+
+<table id="tabla_datos">
+
+  <thead>
+    <tr>
+      <th>Nombres</th>
+      <th>Años de Experiencia</th>
+      <th>Especialidad</th>
+        <th>Restaurante</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+<tbody>
+  {% for e in chefs %}
+  <tr>
+    <td> {{e.nombres}}</td>
+    <td> {{e.anios_experiencia}}</td>
+    <td> {{e.especialidad_culinaria}}</td>
+      <td> {{e.restaurante}}</td>
+    <td>
+        <a href="{% url 'ver_chef' e.id %}">ver</a> <br>
+    </td>
+
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('#tabla_datos').DataTable({
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+      }
+    });
+  });
+
+
+</script>
+{% endblock %}

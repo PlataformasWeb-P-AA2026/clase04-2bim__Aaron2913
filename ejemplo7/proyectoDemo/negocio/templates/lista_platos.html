@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Platos
+{% endblock %}
+
+{% block content %}
+<h2>Listado de Platos
+<a href="{% url 'crear_plato' %}">+</a>
+</h2>
+<h3>Número de platos {{ numero }}</h3>
+
+<table id="tabla_datos">
+
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+        <th>Chef</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+<tbody>
+  {% for e in platos %}
+  <tr>
+    <td> {{e.nombre_plato}}</td>
+    <td> {{e.descripcion}}</td>
+    <td> {{e.precio_plato}}</td>
+      <td> {{e.chef}}</td>
+    <td>
+        <a href="{% url 'ver_plato' e.id %}">ver</a> <br>
+    </td>
+
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('#tabla_datos').DataTable({
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+      }
+    });
+  });
+
+
+</script>
+{% endblock %}
